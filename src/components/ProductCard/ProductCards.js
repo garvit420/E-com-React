@@ -1,40 +1,39 @@
-import { useRef, useState} from "react";
-import Effect from "../effect/effect";
+import { useRef, useState } from "react";
+import Effect from "../Effect/Effect";
 import logo from "../../assets/logo.svg";
+import AddToCart from "../AddToCart/AddToCart";
 
-function ProductCards({ title, price }) {
-    const pRef = useRef(0);
+function ProductCard({ product, cart, increaseQuantity, decreaseQuantity}) {
+    const priceRef = useRef(null);
     const [inputValue, setInputValue] = useState("class");
 
-    function printTitle() {
+    function togglePriceDisplay() {
         console.log("title clicked");
-        console.log(pRef.current.innerText);
+        console.log(priceRef.current.innerText);
 
-        if(pRef.current.style.display === "none") {
-            pRef.current.style.display = "block";
+        if (priceRef.current.style.display === "none") {
+            priceRef.current.style.display = "block";
         } else {
-            pRef.current.style.display = "none";
+            priceRef.current.style.display = "none";
         }
     }
 
-    function changeInputValue(e) {
-        // console.log(inputValue);
+    function handleInputChange(e) {
         setInputValue(e.target.value);
-        // const str = inputRef.current.value;
-        // oRef.current.innerText = `output here: ${str}`;
     }
 
     return (
-        <div className="product-cards">
-            <h2 onClick={printTitle}>{title}</h2>
-            <p ref={pRef}>{price}</p>
-            <img src={logo} alt="logo" />
-            <p> add input here </p>
-            <input type="text" onChange={changeInputValue} value={inputValue}/>
-            <p >output here : {inputValue} </p>
+        <div className="product-card">
+            <h2 onClick={togglePriceDisplay}>{product.title}</h2>
+            <p ref={priceRef}>{product.price}</p>
+            <AddToCart product={product} cart={cart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+            {/* <img src={logo} alt="logo" /> */}
+            <p>Add input here:</p>
+            <input type="text" onChange={handleInputChange} value={inputValue} />
+            <p>Output here: {inputValue}</p>
             <Effect />
         </div>
     );
 }
 
-export default ProductCards;
+export default ProductCard;

@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import Effect from "../Effect/Effect";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import AddToCart from "../AddToCart/AddToCart";
 
-function ProductCard({ product, cart, increaseQuantity, decreaseQuantity}) {
+function ProductCard({ product }) {
     const priceRef = useRef(null);
     const [inputValue, setInputValue] = useState("class");
 
@@ -26,7 +26,7 @@ function ProductCard({ product, cart, increaseQuantity, decreaseQuantity}) {
         <div className="product-card">
             <h2 onClick={togglePriceDisplay}>{product.title}</h2>
             <p ref={priceRef}>{product.price}</p>
-            <AddToCart product={product} cart={cart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+            <AddToCart product={product}  />
             {/* <img src={logo} alt="logo" /> */}
             <p>Add input here:</p>
             <input type="text" onChange={handleInputChange} value={inputValue} />

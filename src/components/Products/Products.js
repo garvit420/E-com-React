@@ -3,54 +3,19 @@ import Effect from "../Effect/Effect";
 import React from "react";
 import { useState, useEffect } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
+import { useDispatch, useSelector } from "react-redux";
+import { loadProducts } from "../../Stores/Products";
 function Products() {
-    // const products = [
-    //       {
-    //         id: 1,
-    //         title: "Apple iPhone 14",
-    //         price: "Rs. 1,00,000"
-    //       },
-    //       {
-    //         id: 2,
-    //         title: "Apple iPhone 13",
-    //         price: "Rs. 70,000"
-    //       },
-    //       {
-    //         id: 3,
-    //         title: "Google Pixel 7",
-    //         price: "Rs. 50,000"
-    //       },
-    //       {
-    //         id: 4,
-    //         title: "Nokia 1100",
-    //         price: "Rs. 2,000"
-    //       },
-    //       {
-    //         id: 5,
-    //         title: "Samsung Galaxy S10",
-    //         price: "Rs. 1,00,000"
-    //       },
-    //       {
-    //         id: 6,
-    //         title: "Sony Xperia S10",
-    //         price: "Rs. 1,00,000"
-    //       }
-    // ];
-  // let products = [];
+  
+  const products = useSelector((state) => state.products.products);
 
-  let [products, setProducts] = useState([]);
   console.log("products")
-  console.log(useWindowSize());
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetch("https://run.mocky.io/v3/1c9a787b-3e6b-4fc2-9460-f908e2e3cc29").then(
-      (response) => {
-        return response.json();
-      }
-    ).then((res) => {
-      console.log(res);
-      setProducts(res);
-    })
-  }, [])
+      dispatch(loadProducts());
+  },[])
 
   
     return (

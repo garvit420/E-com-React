@@ -6,8 +6,15 @@ export function loadProducts() {
             }
         ).then((res) => {
             console.log(res);
-            setProducts(res);
+            dispatch({ type: "LOAD_PRODUCTS_DONE", payload: res });
         })
+    }
+}
+
+export function updateProduct(category_id) {
+    return {
+        type: "UPDATE_PRODUCT",
+        payload: category_id
     }
 }
 
@@ -19,6 +26,12 @@ export function ProductsReducer(state = {
             return {
                 ...state,
                 products: action.payload
+            }
+        }
+        case "UPDATE_PRODUCT": {
+            return {
+                ...state,
+                products: state.products.filter((product) => product.category === action.payload)
             }
         }
         default:
